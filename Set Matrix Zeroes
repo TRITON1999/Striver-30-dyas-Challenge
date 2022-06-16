@@ -1,0 +1,38 @@
+//leetcode question 73 set matrix zeroes
+class Solution {
+public:
+    bool in(vector<int> &v,int f){
+        for(int i=0; i<v.size();++i){
+            if (f==v[i])
+                return true;
+        }
+        return false;
+    }
+    void change(vector<vector<int>>& matrix, vector<int> rows, vector<int> coulums){
+        for(int coulum=0;coulum<coulums.size();coulum++){
+            for(int i=0;i<matrix.size();++i)
+                matrix[i][coulums[coulum]]=0;
+        }
+        for(int row=0;row<rows.size();row++){
+            for(int i=0;i<matrix[0].size();++i)
+                matrix[rows[row]][i]=0;
+        }
+    }
+    void setZeroes(vector<vector<int>>& matrix) {
+        int row = matrix.size();
+        int coulum = matrix[0].size();
+        vector<int> rows,coulums;
+        
+        for(int i=0;i<row;++i){
+            for(int j=0;j<coulum;++j){
+                if(matrix[i][j]==0){
+                    if(!in(rows,i))
+                        rows.push_back(i);
+                    if(!in(coulums,j))
+                        coulums.push_back(j);
+                }
+            }
+        }
+        change(matrix,rows,coulums);
+    }
+};
