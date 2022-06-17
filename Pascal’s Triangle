@@ -1,0 +1,23 @@
+//118. Pascal's Triangle
+
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> v(numRows);
+        v[0]={1};
+        int i=-1,j=0;
+        for(int z=0;z<numRows-1;++z){
+            i=-1;j=0;
+            while(j<=z+1){
+                if(i==-1)
+                    v[z+1].push_back(v[z][j]);
+                else if(j==z+1)
+                    v[z+1].push_back(v[z][i]);
+                else 
+                    v[z+1].push_back(v[z][i] + v[z][j]);
+                ++i;++j;
+            }
+        }
+        return v;
+    }
+};
