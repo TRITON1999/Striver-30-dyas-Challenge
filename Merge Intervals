@@ -1,0 +1,36 @@
+//56. Merge Intervals
+
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        map<vector<int>,bool> m;
+        for(int i=0;i<intervals.size();++i){
+            m[intervals[i]];
+        }
+        vector<vector<int>> result,temp;
+        for(auto item : m){
+            temp.push_back(item.first);
+        }
+        int i,j;
+        for(i=0;i<temp.size();++i){
+            int start=-1,end=-1;
+            for(j=i;j<temp.size();++j){
+                if(start==-1){
+                    start=temp[j][0];
+                    end=temp[j][1];
+                }
+                else{
+                    if(temp[j][0]<=end){
+                        i=j;
+                        if(temp[j][1]>end)
+                            end=temp[j][1];
+                    }
+                    else break;
+                }
+            }
+            if(start!=-1&&end!=-1)
+            result.push_back({start,end});
+        }
+        return result;        
+    }
+};
