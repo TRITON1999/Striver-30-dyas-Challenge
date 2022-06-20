@@ -1,0 +1,33 @@
+
+
+class Solution {
+public:
+//---------------by detection of cycle in linked list method--------------------
+    int index(vector<int> &vec,int f,int s,bool x=false){
+        bool started = true;
+        while(!(s==f) || started){
+            started=false;
+            f=vec[vec[f]];
+        s=vec[s];
+        }
+        f=vec[0];
+        while(s!=f){
+            f=vec[f];
+        s=vec[s];
+        }
+        return s;
+    }
+    int findDuplicate(vector<int>& nums) {
+    
+    //----------------by vector method--------------
+        // vector<int> v(100000);
+        // for(int i=0;i<nums.size();++i){
+        //     if(v[nums[i]-1]==0){
+        //         v[nums[i]-1]=nums[i];
+        //     }
+        //     else return nums[i];
+        // }
+        
+        return index(nums,nums[0],nums[0]);
+    }
+};
