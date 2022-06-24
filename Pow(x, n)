@@ -1,0 +1,26 @@
+// 50. Pow(x, n)
+
+class Solution {
+public:
+    double myPow(double x, long long n) {
+        if(n<0){
+            return myPow((double)(1.0) / (double)(x),-1*n);
+        }
+            if(n==0)
+                return 1.00;
+            if(n/2==0){
+                return x;
+            }
+            long long z=n/2;
+            if(n%2==0){
+                double d=myPow(x,z);
+                return d*d;
+            }
+            else{
+                double d=myPow(x,z);
+                return d*d*x;
+            }
+        
+        return 0;
+    }
+};
