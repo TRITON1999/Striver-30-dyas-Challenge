@@ -1,0 +1,41 @@
+//74. Search a 2D Matrix
+
+class Solution {
+public:
+    bool binarySearch(vector<int>& v,int start,int end,int target){
+        int mid = (end+start)/2;
+        if(start==end){
+            if(target==v[mid])
+                return true;
+                else return false;
+            }
+        if(target==v[mid])
+                return true;
+        if(target<v[mid])
+            return binarySearch(v,start,mid,target);
+        if(target>v[mid])
+            return binarySearch(v,mid+1,end,target);
+        return false;
+    }
+    bool binarySearch(vector<vector<int>>& v,int start,int end,int target){
+        
+        int mid = (end+start)/2;
+        if(target==v[mid][0])
+            return true;
+        if(end==start)
+            return binarySearch(v[end],0,v[end].size()-1,target);
+        if(target<v[mid][0]){
+            
+            return binarySearch(v,start,mid,target);
+        }
+        if(target>v[mid][0]){
+            if(target<v[mid+1][0])
+                return binarySearch(v[mid],0,v[mid].size()-1,target);
+            return binarySearch(v,mid+1,end,target);
+        }
+        return false;
+    }
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        return binarySearch(matrix,0,matrix.size()-1,target);
+    }
+};
