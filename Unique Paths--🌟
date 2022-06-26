@@ -1,0 +1,41 @@
+//62. Unique Paths
+
+
+//---- recursion ------
+class Solution {
+public:
+    int pathCounter(int m, int n,int r=0, int c=0){
+        if(r>=m || c>=n)
+            return 0;
+        if(r==m-1 && c==n-1)
+            return 1;
+        return pathCounter(m,n,r+1,c)+pathCounter(m,n,r,c+1);
+    }
+    int uniquePaths(int m, int n) {
+        return pathCounter(m,n);
+    }
+};
+
+
+//---by converting the above recursion into dp-----
+class Solution {
+public:
+    int pathCounter(vector<vector<int>> &v,int &m, int &n,int r=0, int c=0){
+        if(r>=m || c>=n)
+            return 0;
+        
+        if(r==m-1 && c==n-1)
+            return 1;
+        if(v[r][c]!=0){
+            return v[r][c];
+        }
+        if(v[r][c]==0)
+            v[r][c]=1;
+        v[r][c]=pathCounter(v,m,n,r+1,c)+pathCounter(v,m,n,r,c+1);
+        return v[r][c];
+    }
+    int uniquePaths(int m, int n) {
+        vector<vector<int>> v(m,vector<int> (n,0));
+        return pathCounter(v,m,n);
+    }
+};
