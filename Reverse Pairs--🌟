@@ -1,0 +1,56 @@
+//493. Reverse Pairs
+
+class Solution {
+public:
+    void mergeSort(vector<int> &v,int start,int end,int &answer){
+        if(start==end)
+            return;
+        int mid=(start+end)/2;
+        mergeSort(v,start,mid,answer);
+        mergeSort(v,mid+1,end,answer);
+        vector<int> t;
+        int z=mid+1;
+        int tm=start;
+        while(z<=end&&tm<=mid){
+            long long tempv=v[tm],temp2v=v[z];
+            temp2v=temp2v*2;
+            if(tempv>(temp2v)){
+                answer += (mid-tm+1);
+                z++;
+            }
+            else
+                tm++;
+        }
+        z=mid+1;
+        tm=start;
+        while(z<=end || tm<=mid){
+            if(z<=end&&tm<=mid){
+                if(v[tm]<v[z]){
+                    t.push_back(v[tm]);
+                    tm++;
+                }
+                else{
+                    t.push_back(v[z]);
+                    z++;
+                }
+            }
+            else{
+                if(z>end){
+                    t.push_back(v[tm]);
+                    tm++;
+                }
+                else{
+                    t.push_back(v[z]);
+                    z++;
+                }
+            }
+        }
+        for(int i=start,j=0;i<=end;++i,++j)
+            v[i]=t[j];
+    }
+    int reversePairs(vector<int>& nums) {
+        int answer=0;
+        mergeSort(nums,0,nums.size()-1,answer);
+        return answer;
+    }
+};
