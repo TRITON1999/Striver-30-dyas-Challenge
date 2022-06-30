@@ -1,0 +1,45 @@
+// 4 SUM
+
+class Solution {
+public:
+    vector<vector<int>> twoPointer(int start,int end,long long target,vector<int> &v){
+        vector<vector<int>> result;
+        while(start<end){
+            long long s=v[start],e=v[end];
+            if((s+e)==target){
+                result.push_back({v[start],v[end]});
+                end--;
+            }
+            else if((v[start]+v[end])>=target)
+                end--;
+            else
+                start++;
+        }
+        return result;
+    }
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        map<vector<int>,int> m;
+        vector<vector<int>> result;
+        for(int i=0;i<nums.size();++i){
+            for(int j=i+1;j<nums.size();++j){
+                long long t=target,ni=nums[i],nj=nums[j];
+                vector<vector<int>> v=twoPointer(j+1,nums.size()-1,(t-ni-nj),nums);
+                if(!v.empty()){
+                    for(int k=0;k<v.size();++k){
+                    v[k].push_back(nums[i]);
+                    v[k].push_back(nums[j]);
+                    sort(v[k].begin(),v[k].end());
+                    m[v[k]];
+                    }
+                }
+            }
+        }
+        for(auto mp : m){
+            result.push_back(mp.first);
+        }
+        return result;
+    }
+};
+
+/* here we will first fix the two variable point using two loop then we will find the remaining two digit with two pointer method ,(Note : use of the map is making this algo slow , try thuing of approach to not use the map)
