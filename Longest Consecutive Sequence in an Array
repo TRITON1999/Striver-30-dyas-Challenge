@@ -1,0 +1,38 @@
+//128. Longest Consecutive Sequence
+
+class Solution {
+public:
+    int count(unordered_set<int> &seth,int num){
+        int c=0;
+        num++;
+        
+        while(true){
+            if(seth.find(num)!=seth.end()){
+                c++;
+                num++;
+            }
+            else return c;
+        }
+    }
+    int longestConsecutive(vector<int>& nums) {
+        if(nums.empty())
+            return 0;
+        unordered_set<int> seth;
+        for(int i=0;i<nums.size();i++)
+            seth.insert(nums[i]);
+        int max=INT_MIN,temp;
+        for(int i=0;i<nums.size();++i){
+            if(seth.find(nums[i]-1)==seth.end()){
+                temp=count(seth,(nums[i]-1));
+                if(max<temp)
+                    max=temp;
+            }
+        }
+        return max ;
+    }
+};
+
+/* here we use the data structure unordered_set because the operation take place in get is O(1) (exception : worse case in 0(N))
+first we stored all the value in the set, then we see which value do not have a n-1 value in the set (n being the value its self "nums[i])
+by doing this we can find the entry point from here the sequence will start like in array [2,3,5,4,9] here the entry point will me 2 , 1st the "2" and 2nd "9" 
+then we increse the no. ande see up which point we will habe the linear sequence 
