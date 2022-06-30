@@ -21,3 +21,7 @@ public:
     return res;
     }
 };
+
+
+/* here is one more aproach which is called two pointer appoach, each will start with each ends if the sum is greater than targer then we will do -- to the end 
+pointer and if less then we will do ++ tp the starting pointer. */
